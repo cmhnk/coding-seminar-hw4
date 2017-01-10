@@ -1,0 +1,87 @@
+Class Notes
+Jan. 10, 2017
+
+-Key word arguments are followed by colons, like so:
+  def initialize(name:, email:, phone:, salary:)
+
+-Everything in objects is passing messages
+-Attr methods give us a window into the instance variables so that we can read them out
+  attr_reader :salary
+    attr stands for attribute
+
+-You can invent new instance variables all the time in your class; they don't have to be defined in the initialize() method
+-If you haven't defined an instance variable yet, they're just treated as empty or nil, they don't cause explosions
+  example in irb
+  mason = 'that guy'
+  puts mason
+    => 'that guy'
+  puts rachel
+    EXPLODES
+  puts @rachel
+    => nil
+
+-Predicate methods have a question mark at the end
+  example
+  mason.is_good?
+
+-Getters versus setters
+-Think blood-brain barrier; you as a developer control what comes in & out of the class
+-What's available from the outside is the "interface"
+-We want there to be as little "interface" to your class
+    attr_writer :review
+      OR
+    def review=(review)
+      @review = review
+    end
+
+    ^ not good practice to use 'review' as the name of the parameter; better to use something else, like 'r'
+
+-Enumerables
+  .each do |thing|
+  .all
+  .any?
+  .select
+  .reject
+  .map    (aka .collect)
+  .reduce (aka .inject)
+
+-Example in irb
+  array = ["Ryan", "Mary", "Carly", "Locky"]
+  array.select do |name|
+    name.length > 4
+  end
+
+  ^ this is equivalent to
+  array.select {|name| name.length > 4}
+
+  You can also assign that to a variable, let's say long_names
+  long_names = array.select {|name| name.length > 4}
+
+  array.reject is the opposite of .select
+
+  array.all? {|name| name.length > 3}
+    => true
+
+  array.any? {|name| == 'Locky'}
+    => true
+
+  array.map {|name| name.reverse}
+
+-The .map method will yield an array of the same length, just transforming each element
+
+-The .reduce method tries to take an array and reduce it to one number
+-The first arg is the accumulator, the second arg is the unit that's being accumulated
+  Example:
+  @employees.reduce(0) {|sum, e| sum + e.salary}
+    You have to 'seed' it / give it a start value. So 'sum' starts at 0.
+    If you were to do multiplication, you'd want the seed to be 1.
+      array = [1, 2, 3, 4]
+      array.reduce(1) {|product, a| product + a}
+
+-Can chain them together too, like .map.select.reduce
+
+-Question about for loops -- often I need the counter, too:
+  .each_with_index you can get extra parameter @employees.each_with_index {|employee, i| puts "#{employee}, #{i}"}
+
+  good_employees = employees.select { |e| e.is_good? }
+-Think of these enumerable methods as marching through rather than calculating everything all at once
