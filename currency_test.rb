@@ -12,9 +12,17 @@ class CurrencyTest < Minitest::Test
     b = Currency.new(amount: 34, code: 'USD')
     # the thing that comes after assert needs to be true
     assert a == b
+  end
 
-    c = Currency.new(amount: 34, code: 'EUR')
-    # refute means that the thing that comes after must be falsy
-    refute a == c
+  def test_unequal_currencies_dif_amounts
+    a = Currency.new(amount: 34, code: 'EUR')
+    b = Currency.new(amount: 35, code: 'EUR')
+    refute a == b
+  end
+
+  def test_unequal_currencies_dif_amounts
+    a = Currency.new(amount: 34, code: 'EUR')
+    b = Currency.new(amount: 34, code: 'USD')
+    refute a == b
   end
 end
