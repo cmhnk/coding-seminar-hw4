@@ -10,4 +10,12 @@ class Currency
   def ==(other)
     @amount == other.amount && @code == other.code
   end
+
+  def +(other)
+    if code == other.code
+      amount + other.amount
+    else
+      "Amounts must be the same currency."
+    end
+  end
 end

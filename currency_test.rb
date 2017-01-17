@@ -25,4 +25,10 @@ class CurrencyTest < Minitest::Test
     b = Currency.new(amount: 34, code: 'USD')
     refute a == b
   end
+
+  def test_addition_same_currency
+    a = Currency.new(amount: 10, code: 'USD')
+    b = Currency.new(amount: 20, code: 'USD')
+    assert a + b == 30
+  end
 end
