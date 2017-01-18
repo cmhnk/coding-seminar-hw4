@@ -55,8 +55,8 @@ class CurrencyTest < Minitest::Test
   end
 
   def test_parse_amount
-    a = Currency.new(amount_with_symbol: '$1438')
-    b = Currency.new(amount: 1438, code: 'USD')
+    a = Currency.new(amount_with_symbol: '$14.38')
+    b = Currency.new(amount: 14.38, code: 'USD')
     assert a.amount = b.amount
   end
 
@@ -73,14 +73,28 @@ class CurrencyTest < Minitest::Test
   end
 
   def test_addition_of_objects_instantiated_w_dif_args
-    a = Currency.new(amount_with_symbol: '$10')
+    a = Currency.new(amount_with_symbol: '$10.50')
     b = Currency.new(amount: 30, code: 'USD')
-    assert 40 == a + b
+    assert 40.50 == a + b
   end
 
   def test_amount_with_symbol_unsupported_symbol
     assert_raises DifferentCurrencyCodeError do
       Currency.new(amount_with_symbol: '¥100')
+    end
+  end
+
+  def test_subtraction_same_currency
+    a = Currency.new(amount: 100, code: 'USD')
+    b = Currency.new(amount: 20, code: 'USD')
+    assert 80 == a - b
+  end
+
+  def test_subtraction_dif_currency
+    a = Currency.new(amount: 10, code: 'USD')
+    b = Currency.new(amount: 10, code: 'EUR')
+    assert_raises DifferentCurrencyCodeError do
+      a - b
     end
   end
 

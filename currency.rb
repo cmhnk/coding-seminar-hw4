@@ -26,6 +26,14 @@ class Currency
     end
   end
 
+  def -(other)
+    if code == other.code
+      amount - other.amount
+    else
+      raise DifferentCurrencyCodeError, "Amounts must be the same currency."
+    end
+  end
+
   def *(num)
     if num.is_a?(Fixnum) || num.is_a?(Float)
       new_amount = amount*num
@@ -35,7 +43,7 @@ class Currency
 
   def parse_amount_with_symbol
     codes_symbols = {'$' => 'USD', '€' => 'EUR'}
-    amount = amount_with_symbol.scan(/\d/).join
+    amount = amount_with_symbol.scan(/\d|\./).join
     symbol = amount_with_symbol[/\$|€/]
     if codes_symbols.key?(symbol)
       code = codes_symbols[symbol]
