@@ -1,5 +1,6 @@
 class Currency
 
+  require_relative 'different_currency_code_error.rb'
   attr_reader :amount, :code
 
   def initialize(amount:, code:)
@@ -15,7 +16,7 @@ class Currency
     if code == other.code
       amount + other.amount
     else
-      "Amounts must be the same currency."
+      raise DifferentCurrencyCodeError, "Amounts must be the same currency."
     end
   end
 end

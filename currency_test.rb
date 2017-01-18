@@ -1,6 +1,8 @@
 require 'minitest/pride'
 require 'minitest/autorun'
+
 require_relative 'currency.rb'
+
 
 class CurrencyTest < Minitest::Test
   def test_currency_creation
@@ -30,5 +32,13 @@ class CurrencyTest < Minitest::Test
     a = Currency.new(amount: 10, code: 'USD')
     b = Currency.new(amount: 20, code: 'USD')
     assert a + b == 30
+  end
+
+  def test_addition_dif_currency
+    a = Currency.new(amount: 10, code: 'USD')
+    b = Currency.new(amount: 10, code: 'EUR')
+    assert_raises DifferentCurrencyCodeError do
+      a + b
+    end
   end
 end
