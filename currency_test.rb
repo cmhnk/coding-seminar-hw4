@@ -77,4 +77,11 @@ class CurrencyTest < Minitest::Test
     b = Currency.new(amount: 30, code: 'USD')
     assert 40 == a + b
   end
+
+  def test_amount_with_symbol_unsupported_symbol
+    assert_raises DifferentCurrencyCodeError do
+      Currency.new(amount_with_symbol: '¥100')
+    end
+  end
+
 end
