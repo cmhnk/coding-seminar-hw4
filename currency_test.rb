@@ -59,4 +59,22 @@ class CurrencyTest < Minitest::Test
     b = Currency.new(amount: 1438, code: 'USD')
     assert a.amount = b.amount
   end
+
+  def test_parse_code
+    a = Currency.new(amount_with_symbol: '$1438')
+    b = Currency.new(amount: 1438, code: 'USD')
+    assert a.code = b.code
+  end
+
+  def test_parse_code
+    a = Currency.new(amount_with_symbol: '$1438')
+    b = Currency.new(amount: 1438, code: 'USD')
+    assert a.code = b.code
+  end
+
+  def test_addition_of_objects_instantiated_w_dif_args
+    a = Currency.new(amount_with_symbol: '$10')
+    b = Currency.new(amount: 30, code: 'USD')
+    assert 40 == a + b
+  end
 end

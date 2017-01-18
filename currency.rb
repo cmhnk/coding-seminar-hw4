@@ -39,7 +39,7 @@ class Currency
     symbol = amount_with_symbol[/\$|€/]
     if codes_symbols.key?(symbol)
       code = codes_symbols[symbol]
-      self.amount = amount
+      self.amount = amount.to_f
       self.code = code
     else
       raise DifferentCurrencyCodeError, "Sorry, functionality for #{symbol} is not included yet."
