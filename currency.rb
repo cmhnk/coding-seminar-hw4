@@ -19,4 +19,12 @@ class Currency
       raise DifferentCurrencyCodeError, "Amounts must be the same currency."
     end
   end
+
+  def *(num)
+    if num.is_a?(Fixnum) || num.is_a?(Float)
+      new_amount = amount*num
+      Currency.new(amount: new_amount, code: code)
+    end
+  end
+
 end

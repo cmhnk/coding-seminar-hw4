@@ -41,4 +41,16 @@ class CurrencyTest < Minitest::Test
       a + b
     end
   end
+
+  def test_multiplication_by_fixnum
+    a = Currency.new(amount: 10, code: 'USD')
+    b = 10
+    assert a * b == Currency.new(amount: 100, code: 'USD')
+  end
+
+  def test_multiplication_by_float
+    a = Currency.new(amount: 10, code: 'USD')
+    b = 10.05
+    assert a * b == Currency.new(amount: 100.50, code: 'USD')
+  end
 end
