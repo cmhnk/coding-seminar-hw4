@@ -105,10 +105,10 @@ class CurrencyTest < Minitest::Test
     @currency_converter = CurrencyConverter.new(@conversion_rates)
   end
 
-  def test_currency_converter_returns_correct_value
-    a = Currency.new(amount: 10, code: 'USD')
+  def test_currency_converter_returns_expected_currency_object
+    a = Currency.new(amount: 10, code: :USD)
     conversion_rates = {'USD': 1.0, 'EUR': 0.74}
     currency_converter = CurrencyConverter.new(conversion_rates)
-    assert currency_converter.convert(a, :USD) == 10
+    assert currency_converter.convert(a, :USD) == a
   end
 end
