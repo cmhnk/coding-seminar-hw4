@@ -2,6 +2,7 @@ require 'minitest/pride'
 require 'minitest/autorun'
 
 require_relative 'currency.rb'
+require_relative 'currency_converter.rb'
 
 
 class CurrencyTest < Minitest::Test
@@ -98,4 +99,16 @@ class CurrencyTest < Minitest::Test
     end
   end
 
+  ### CurrencyConverter tests
+  def test_currency_converter_creation
+    @conversion_rates = {USD: 1.0, EUR: 0.74}
+    @currency_converter = CurrencyConverter.new(@conversion_rates)
+  end
+
+  def test_currency_converter_returns_correct_value
+    a = Currency.new(amount: 10, code: 'USD')
+    conversion_rates = {'USD': 1.0, 'EUR': 0.74}
+    currency_converter = CurrencyConverter.new(conversion_rates)
+    assert currency_converter.convert(a, :USD) == 10
+  end
 end
