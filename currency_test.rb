@@ -53,4 +53,10 @@ class CurrencyTest < Minitest::Test
     b = 10.05
     assert a * b == Currency.new(amount: 100.50, code: 'USD')
   end
+
+  def test_parse_amount
+    a = Currency.new(amount_with_symbol: '$1438')
+    b = Currency.new(amount: 1438, code: 'USD')
+    assert a.amount = b.amount
+  end
 end
