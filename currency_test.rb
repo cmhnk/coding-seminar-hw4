@@ -113,8 +113,8 @@ class CurrencyTest < Minitest::Test
   end
 
   def test_currency_converter_usd_to_eur
-    a = Currency.new(amount: 10, code: :USD)
-    conversion_rates = {'USD': 1000, 'EUR': 0.74}
+    a = Currency.new(amount: 1000, code: :USD)
+    conversion_rates = {'USD': 1, 'EUR': 0.74}
     currency_converter = CurrencyConverter.new(conversion_rates)
     assert currency_converter.convert(a, :EUR) == Currency.new(amount: 740, code: :EUR)
   end
