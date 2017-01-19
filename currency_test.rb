@@ -127,4 +127,11 @@ class CurrencyTest < Minitest::Test
       currency_converter.convert(a, :AFN)
     end
   end
+
+  def test_currency_converter_works_with_3_or_more_currency_rates
+    a =Currency.new(amount: 100, code: :EUR)
+    conversion_rates = {USD: 1.0, EUR: 0.74, JPY: 120.0}
+    currency_converter = CurrencyConverter.new(conversion_rates)
+    assert currency_converter.convert(a, :JPY) == Currency.new(amount: 16216.22, code: :JPY)
+  end
 end
