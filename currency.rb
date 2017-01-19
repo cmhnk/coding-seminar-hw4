@@ -1,13 +1,13 @@
 class Currency
 
-  require_relative 'different_currency_code_error.rb'
+  require_relative 'custom_errors.rb'
   attr_reader :amount, :code, :amount_with_symbol
   attr_writer :amount, :code # I wanted this private, but then my tests failed
 
   def initialize(amount: nil, code: nil, amount_with_symbol: nil)
-    @amount = amount
-    @code = code
-    @amount_with_symbol = amount_with_symbol
+    @amount ||= amount
+    @code ||= code
+    @amount_with_symbol ||= amount_with_symbol
 
     if @amount_with_symbol != nil
       parse_amount_with_symbol

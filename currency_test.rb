@@ -111,4 +111,20 @@ class CurrencyTest < Minitest::Test
     currency_converter = CurrencyConverter.new(conversion_rates)
     assert currency_converter.convert(a, :USD) == a
   end
+
+  def test_currency_converter_usd_to_eur
+    a = Currency.new(amount: 10, code: :USD)
+    conversion_rates = {'USD': 1000, 'EUR': 0.74}
+    currency_converter = CurrencyConverter.new(conversion_rates)
+    assert currency_converter.convert(a, :EUR) == Currency.new(amount: 740, code: :EUR)
+  end
+
+  def test_currency_converter_raise_error_unknown_code
+    a = Currency.new(amount: 10, code: :USD)
+    conversion_rates = {'USD': 1, 'EUR': 0.74}
+    currency_converter = CurrencyConverter.new(conversion_rates)
+    assert_raises UnknownCurrencyCodeError do
+      currency_converter.convert(a, :AFN)
+    end
+  end
 end
