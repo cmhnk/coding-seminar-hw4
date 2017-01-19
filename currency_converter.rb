@@ -10,6 +10,7 @@ class CurrencyConverter
     current_currency = currency_object.code
     current_amount = currency_object.amount
     new_code = desired_currency.to_sym
+
     if hash.key?(current_currency) && hash.key?(new_code)
       current_amount_rate = hash[current_currency]
       new_amount_rate = hash[new_code]
